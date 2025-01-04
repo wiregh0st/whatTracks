@@ -1,12 +1,15 @@
 plugins {
-	id 'java'
-	id 'org.springframework.boot' version '3.4.1'
-	id 'io.spring.dependency-management' version '1.1.7'
+	id 'application'
+	alias(libs.plugins.spring.boot)
+	alias(libs.plugins.spring.dep.mgmt)
+	//flyway plugin for db migration versioning
+	alias(libs.plugins.flyway)
 }
 
-group = 'com.example'
+group = 'org.latedriver'
 version = '0.0.1-SNAPSHOT'
 
+//Utilize specific java toolchain
 java {
 	toolchain {
 		languageVersion = JavaLanguageVersion.of(23)
@@ -18,10 +21,21 @@ repositories {
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	implementation 'org.flywaydb:flyway-core'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+	implementation libs.spring.boot.starter.data
+	implementation libs.flyway.core
+	testImplementation libs.spring.boot.starter.test
+	testRuntimeOnly libs.junit.platform
+}
+
+flyway {
+	url =  '' //db url
+	user = '' //db user
+	password = '' //db pass
+	locations = [''] //migration script location
+}
+
+application {
+	mainClass = 'org.latedriver.whattracks.WhatTracksApp'
 }
 
 tasks.named('test') {
