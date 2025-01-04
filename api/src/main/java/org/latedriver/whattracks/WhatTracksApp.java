@@ -1,13 +1,13 @@
-package com.example.demo;
+package org.latedriver.whattracks;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class WhatTracksApplication {
+public class WhatTracksApp {
 
 	public static void main(String[] args) {
-		SpringApplication.run(WhatTracksApplication.class, args);
+		SpringApplication.run(WhatTracksApp.class, args);
 	}
 
 }
