@@ -20,19 +20,24 @@ repositories {
 	mavenCentral()
 }
 
+
 dependencies {
 	implementation libs.spring.boot.starter.data
-	implementation libs.flyway.core
+	implementation "org.flywaydb:flyway-database-postgresql"
+	implementation "org.postgresql:postgresql:42.7.4"
+	implementation "me.paulschwarz:spring-dotenv:4.0.0"
 	testImplementation libs.spring.boot.starter.test
 	testRuntimeOnly libs.junit.platform
 }
 
 flyway {
-	url =  '' //db url
-	user = '' //db user
-	password = '' //db pass
-	locations = [''] //migration script location
+	url =  'jdbc:postgresql://localhost:5432/what_tracks' //db url
+	user = 'postgres' //db user
+	password = 'postgres' //db pass
+	// locations = ['classpath:resources/db/migration'] //migration script location
 }
+
+flywayMigrate.dependsOn classes
 
 application {
 	mainClass = 'org.latedriver.whattracks.WhatTracksApp'
